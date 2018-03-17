@@ -28,12 +28,34 @@ extension UIViewController{
         return dateFormatter.string(from: date)
     }
     
-    func currentToSeconds(date: String) ->String{
+    func currentToSeconds() ->String{
         let today = String((Date().timeIntervalSince1970).rounded())
         return today
     }
     
 
     
+    
+}
+
+extension UITableViewCell{
+
+    
+    func SecToDate(timeStamp: String) -> String? {
+        
+        guard let time = Double(timeStamp) else{return nil}
+        let date = Date(timeIntervalSince1970: (time))
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier:Locale.current.identifier)
+        dateFormatter.dateFormat = "dd/MM hh:mm"
+        return dateFormatter.string(from: date)
+    }
+    
+    func currentToSeconds() ->String{
+        let today = String((Date().timeIntervalSince1970).rounded())
+        return today
+    }
+    
+
     
 }

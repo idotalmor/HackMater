@@ -34,6 +34,10 @@ class DeliveryWaitingViewController: UIViewController, UITableViewDelegate, UITa
         tableview.delegate = self
         tableview.dataSource = self
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         refresh()
         
     }
@@ -85,10 +89,8 @@ class DeliveryWaitingViewController: UIViewController, UITableViewDelegate, UITa
         
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        refresh()
-    }
+    
+
     
     
     func refresh(){
@@ -120,14 +122,11 @@ extension DeliveryWaitingViewController {
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
             if let response = response {
-                print(response)
             }
             
             if let data = data {
                 do {
-                    self.json = try JSONSerialization.jsonObject(with: data, options: [])
-                    print(self.json)
-                    
+                    self.json = try JSONSerialization.jsonObject(with: data, options: [])                    
                 } catch {
                     print(error)
                 }

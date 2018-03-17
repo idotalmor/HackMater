@@ -399,10 +399,10 @@
             </objects>
             <point key="canvasLocation" x="-926" y="-919"/>
         </scene>
-        <!--ido-->
+        <!--donations-->
         <scene sceneID="Jz1-43-FPd">
             <objects>
-                <viewControllerPlaceholder storyboardName="products" referencedIdentifier="ido" id="nBr-ic-gEI" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="products" referencedIdentifier="donations" id="nBr-ic-gEI" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="תרומה" image="icons8-bottle" selectedImage="icons8-bottle" id="1b5-NR-qUN"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wt1-Dj-MkF" userLabel="First Responder" sceneMemberID="firstResponder"/>

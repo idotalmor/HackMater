@@ -84,6 +84,15 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
+        
+        if let user = User.current {
+            activityIndicator.startAnimating()
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now(), execute: {
+                
+                self.getPermissionToSegue()
+                
+            })
+        }
     }
     
     override func viewDidLoad() {
@@ -97,14 +106,7 @@ class LoginViewController: UIViewController {
         self.view.insertSubview(backgroundImgView, at: 0)
         
         
-        if let user = User.current {
-            activityIndicator.startAnimating()
-            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now(), execute: {
 
-                 self.getPermissionToSegue()
-
-            })
-        }
     
     }
     

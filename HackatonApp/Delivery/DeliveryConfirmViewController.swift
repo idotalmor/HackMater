@@ -33,10 +33,11 @@ class DeliveryConfirmViewController: UIViewController, FCAlertViewDelegate {
         alert.colorScheme = UIColor(red: 0/255, green: 79/255, blue: 150/255, alpha: 1)
         
         alert.delegate = self
+        let imagealert = UIImage(named: "icons8-checkmark")
         alert.showAlert(inView: self,
                         withTitle:"איסוף תרומה",
                         withSubtitle:"האם ברצונך לאסוף תרומה זו?",
-                        withCustomImage:nil,
+                        withCustomImage:imagealert,
                         withDoneButtonTitle:"ביטול",
                         andButtons:["אשר איסוף","אשר איסוף ופתח וייז"])
     }
@@ -79,8 +80,7 @@ class DeliveryConfirmViewController: UIViewController, FCAlertViewDelegate {
 
     var json : Any = ""{
         didSet{
-//            print(json)
-//            print("updateDelivery")
+
 
         }}
 
@@ -165,7 +165,6 @@ extension DeliveryConfirmViewController {
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
             if let response = response {
-                print(response)
             }
             
             if let data = data {

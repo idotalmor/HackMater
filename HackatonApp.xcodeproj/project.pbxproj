@@ -26,6 +26,8 @@
 		AD9BBFD02039C36600FB4459 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9BBFCF2039C36600FB4459 /* ResetPasswordViewController.swift */; };
 		AD9BBFD22039C51800FB4459 /* CustomSegues.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9BBFD12039C51800FB4459 /* CustomSegues.swift */; };
 		AD9BBFD4203A121B00FB4459 /* ProductLevelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9BBFD3203A121B00FB4459 /* ProductLevelsViewController.swift */; };
+		ADF504BD205D52E30051D704 /* ReceiverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF504BC205D52E30051D704 /* ReceiverTableViewCell.swift */; };
+		ADF504BF205D65F40051D704 /* ReceiverProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF504BE205D65F40051D704 /* ReceiverProductViewController.swift */; };
 		C702DB8F205345FA00480118 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = C702DB8E205345FA00480118 /* Product.swift */; };
 		C7070C5B204AE25C00B498A7 /* DeliverymainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7070C5A204AE25C00B498A7 /* DeliverymainViewController.swift */; };
 		C7070C5F204AE85C00B498A7 /* DeliveryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7070C5E204AE85C00B498A7 /* DeliveryTableViewCell.swift */; };
@@ -42,7 +44,7 @@
 		C7776BA3204ED3BA00963366 /* ManagerDeliveryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7776BA2204ED3BA00963366 /* ManagerDeliveryTableViewCell.swift */; };
 		C7776BA7204F03D900963366 /* ManagerSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7776BA6204F03D900963366 /* ManagerSettingsViewController.swift */; };
 		C7776BA9204F0C3A00963366 /* ProductSenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7776BA8204F0C3A00963366 /* ProductSenderViewController.swift */; };
-		C7776BAB204F0C5900963366 /* ProductReceiverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7776BAA204F0C5900963366 /* ProductReceiverViewController.swift */; };
+		C7776BAB204F0C5900963366 /* ReceiverTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7776BAA204F0C5900963366 /* ReceiverTableViewController.swift */; };
 		C7776BAD204F40A600963366 /* DeliveryWaitingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7776BAC204F40A600963366 /* DeliveryWaitingViewController.swift */; };
 		C7776BAF204F41E700963366 /* DeliveryWaitingProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7776BAE204F41E700963366 /* DeliveryWaitingProductViewController.swift */; };
 		C7776BB1204F460800963366 /* DeliveryWaitingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7776BB0204F460800963366 /* DeliveryWaitingTableViewCell.swift */; };
@@ -93,6 +95,8 @@
 		AD9BBFCF2039C36600FB4459 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		AD9BBFD12039C51800FB4459 /* CustomSegues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegues.swift; sourceTree = "<group>"; };
 		AD9BBFD3203A121B00FB4459 /* ProductLevelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductLevelsViewController.swift; sourceTree = "<group>"; };
+		ADF504BC205D52E30051D704 /* ReceiverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverTableViewCell.swift; sourceTree = "<group>"; };
+		ADF504BE205D65F40051D704 /* ReceiverProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverProductViewController.swift; sourceTree = "<group>"; };
 		C702DB8E205345FA00480118 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		C7070C5A204AE25C00B498A7 /* DeliverymainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliverymainViewController.swift; sourceTree = "<group>"; };
 		C7070C5E204AE85C00B498A7 /* DeliveryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryTableViewCell.swift; sourceTree = "<group>"; };
@@ -109,7 +113,7 @@
 		C7776BA2204ED3BA00963366 /* ManagerDeliveryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerDeliveryTableViewCell.swift; sourceTree = "<group>"; };
 		C7776BA6204F03D900963366 /* ManagerSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerSettingsViewController.swift; sourceTree = "<group>"; };
 		C7776BA8204F0C3A00963366 /* ProductSenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSenderViewController.swift; sourceTree = "<group>"; };
-		C7776BAA204F0C5900963366 /* ProductReceiverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductReceiverViewController.swift; sourceTree = "<group>"; };
+		C7776BAA204F0C5900963366 /* ReceiverTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverTableViewController.swift; sourceTree = "<group>"; };
 		C7776BAC204F40A600963366 /* DeliveryWaitingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryWaitingViewController.swift; sourceTree = "<group>"; };
 		C7776BAE204F41E700963366 /* DeliveryWaitingProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryWaitingProductViewController.swift; sourceTree = "<group>"; };
 		C7776BB0204F460800963366 /* DeliveryWaitingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryWaitingTableViewCell.swift; sourceTree = "<group>"; };
@@ -287,9 +291,11 @@
 				C792DCB72044C896000CF549 /* ProductMainCollectionViewCell.swift */,
 				C7070C68204B4B2300B498A7 /* ProductLevelsSecViewController.swift */,
 				C7776BA8204F0C3A00963366 /* ProductSenderViewController.swift */,
-				C7776BAA204F0C5900963366 /* ProductReceiverViewController.swift */,
 				C7F81F6C2055F88500FFB5EC /* ProductSenderFormViewController.swift */,
 				C7F81F6E2055F89B00FFB5EC /* ProductReceiverFormViewController.swift */,
+				C7776BAA204F0C5900963366 /* ReceiverTableViewController.swift */,
+				ADF504BC205D52E30051D704 /* ReceiverTableViewCell.swift */,
+				ADF504BE205D65F40051D704 /* ReceiverProductViewController.swift */,
 			);
 			path = products;
 			sourceTree = "<group>";
@@ -457,7 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7D22F6A2050030A00707F01 /* ManagerStorageProductViewController.swift in Sources */,
-				C7776BAB204F0C5900963366 /* ProductReceiverViewController.swift in Sources */,
+				C7776BAB204F0C5900963366 /* ReceiverTableViewController.swift in Sources */,
 				C7070C63204B0B7600B498A7 /* DeliveryFormViewController.swift in Sources */,
 				AD660853203B0F88007DF894 /* RssCell.swift in Sources */,
 				C7776B9D204EA25B00963366 /* DeliveryQRScannerController.swift in Sources */,
@@ -476,6 +482,7 @@
 				C7070C61204AF8E100B498A7 /* DeliveryConfirmViewController.swift in Sources */,
 				C7B6502E2038CE7D001BBAB2 /* ProductDonateViewController.swift in Sources */,
 				AD9BBFCE2039C2A100FB4459 /* SignUpViewController.swift in Sources */,
+				ADF504BD205D52E30051D704 /* ReceiverTableViewCell.swift in Sources */,
 				AD287FA7205A80DC0007A2AD /* DesignableUIView.swift in Sources */,
 				C79FD4B6204D746C005FC0CD /* ProfileViewController.swift in Sources */,
 				C7BB2EC2205098CF00574AB8 /* DeliverySettingsViewController.swift in Sources */,
@@ -502,6 +509,7 @@
 				C7218849204FFB1E0070E0FE /* ManagerStorageViewController.swift in Sources */,
 				C702DB8F205345FA00480118 /* Product.swift in Sources */,
 				C721884B204FFB3A0070E0FE /* ManagerStorageTableViewCell.swift in Sources */,
+				ADF504BF205D65F40051D704 /* ReceiverProductViewController.swift in Sources */,
 				C7F81F6F2055F89B00FFB5EC /* ProductReceiverFormViewController.swift in Sources */,
 				C7070C5F204AE85C00B498A7 /* DeliveryTableViewCell.swift in Sources */,
 				C7776BB1204F460800963366 /* DeliveryWaitingTableViewCell.swift in Sources */,

@@ -40,13 +40,13 @@ class DeliverymainViewController: UIViewController, UITableViewDelegate, UITable
         tableView.delegate = self
         tableView.dataSource = self
         
-        getDeliveryTransaction()
-        
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         reloadData()
+
     }
     
     func reloadData(){
@@ -119,14 +119,11 @@ extension DeliverymainViewController {
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
             if let response = response {
-                print(response)
             }
             
             if let data = data {
                 do {
                     self.json = try JSONSerialization.jsonObject(with: data, options: [])
-                    print(self.json)
-                    
                 } catch {
                     print(error)
                 }

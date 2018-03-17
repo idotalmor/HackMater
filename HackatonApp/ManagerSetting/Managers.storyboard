@@ -434,7 +434,7 @@
             </objects>
             <point key="canvasLocation" x="-859.20000000000005" y="-98.950524737631198"/>
         </scene>
-        <!--Manager Storage View Controller-->
+        <!--מלאי-->
         <scene sceneID="PhE-fq-Q7e">
             <objects>
                 <viewController id="1re-Ff-LHs" customClass="ManagerStorageViewController" customModule="HackatonApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -510,7 +510,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pjv-mv-qKH"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Y9s-ys-G5X">
+                    <navigationItem key="navigationItem" title="מלאי" id="Y9s-ys-G5X">
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="mUm-9h-4IE">
                             <connections>
                                 <action selector="refreshPage:" destination="1re-Ff-LHs" id="Pb8-2A-dez"/>

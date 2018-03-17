@@ -179,6 +179,11 @@ class DeliveryFormViewController: UIViewController, UIPickerViewDataSource, UIPi
      
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = false
+    }
+    
     public func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
         
