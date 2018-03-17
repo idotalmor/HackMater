@@ -40,7 +40,7 @@ class ReceiverTableViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewWillAppear(animated)
         refresh()
         self.navigationController?.isNavigationBarHidden = false
-
+        
         
     }
     
@@ -84,7 +84,7 @@ class ReceiverTableViewController: UIViewController, UITableViewDelegate, UITabl
         tableview.reloadData()
         parameters = ["status": "2","warehouse":"1"]
         getWaitingForReceiverTransactions()
-
+        
     }
     
 }

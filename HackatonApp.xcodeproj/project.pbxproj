@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C927276A3B2926A0824ED16 /* Pods_HackatonApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5BF4BC7E33021E5DCD6C3A5 /* Pods_HackatonApp.framework */; };
+		AD024BF2205D7879002A36A6 /* ReceiverFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD024BF1205D7879002A36A6 /* ReceiverFormViewController.swift */; };
 		AD1F3E6720373AAB00D040C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1F3E6620373AAB00D040C8 /* AppDelegate.swift */; };
 		AD1F3E6920373AAB00D040C8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1F3E6820373AAB00D040C8 /* LoginViewController.swift */; };
 		AD1F3E6C20373AAB00D040C8 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD1F3E6A20373AAB00D040C8 /* Authentication.storyboard */; };
@@ -25,7 +26,7 @@
 		AD9BBFCE2039C2A100FB4459 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9BBFCD2039C2A100FB4459 /* SignUpViewController.swift */; };
 		AD9BBFD02039C36600FB4459 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9BBFCF2039C36600FB4459 /* ResetPasswordViewController.swift */; };
 		AD9BBFD22039C51800FB4459 /* CustomSegues.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9BBFD12039C51800FB4459 /* CustomSegues.swift */; };
-		AD9BBFD4203A121B00FB4459 /* ProductLevelsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9BBFD3203A121B00FB4459 /* ProductLevelsViewController.swift */; };
+		AD9BBFD4203A121B00FB4459 /* ProductCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9BBFD3203A121B00FB4459 /* ProductCollectionViewController.swift */; };
 		ADF504BD205D52E30051D704 /* ReceiverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF504BC205D52E30051D704 /* ReceiverTableViewCell.swift */; };
 		ADF504BF205D65F40051D704 /* ReceiverProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF504BE205D65F40051D704 /* ReceiverProductViewController.swift */; };
 		C702DB8F205345FA00480118 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = C702DB8E205345FA00480118 /* Product.swift */; };
@@ -35,7 +36,7 @@
 		C7070C63204B0B7600B498A7 /* DeliveryFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7070C62204B0B7600B498A7 /* DeliveryFormViewController.swift */; };
 		C7070C65204B0C5A00B498A7 /* DeliveryTabFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7070C64204B0C5A00B498A7 /* DeliveryTabFormViewController.swift */; };
 		C7070C67204B27D500B498A7 /* ProductLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7070C66204B27D500B498A7 /* ProductLevel.swift */; };
-		C7070C69204B4B2300B498A7 /* ProductLevelsSecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7070C68204B4B2300B498A7 /* ProductLevelsSecViewController.swift */; };
+		C7070C69204B4B2300B498A7 /* ProductCollectionDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7070C68204B4B2300B498A7 /* ProductCollectionDetailsViewController.swift */; };
 		C7218847204FF3000070E0FE /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7218846204FF3000070E0FE /* UIViewControllerExtension.swift */; };
 		C7218849204FFB1E0070E0FE /* ManagerStorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7218848204FFB1E0070E0FE /* ManagerStorageViewController.swift */; };
 		C721884B204FFB3A0070E0FE /* ManagerStorageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C721884A204FFB3A0070E0FE /* ManagerStorageTableViewCell.swift */; };
@@ -74,6 +75,7 @@
 /* Begin PBXFileReference section */
 		0D880900897DBE6BFC6D0C07 /* Pods-HackatonApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackatonApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HackatonApp/Pods-HackatonApp.debug.xcconfig"; sourceTree = "<group>"; };
 		7105BC14271AEC308B67A239 /* Pods-HackatonApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HackatonApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-HackatonApp/Pods-HackatonApp.release.xcconfig"; sourceTree = "<group>"; };
+		AD024BF1205D7879002A36A6 /* ReceiverFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverFormViewController.swift; sourceTree = "<group>"; };
 		AD1F3E6320373AAB00D040C8 /* HackatonApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackatonApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD1F3E6620373AAB00D040C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AD1F3E6820373AAB00D040C8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -94,7 +96,7 @@
 		AD9BBFCD2039C2A100FB4459 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		AD9BBFCF2039C36600FB4459 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		AD9BBFD12039C51800FB4459 /* CustomSegues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegues.swift; sourceTree = "<group>"; };
-		AD9BBFD3203A121B00FB4459 /* ProductLevelsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductLevelsViewController.swift; sourceTree = "<group>"; };
+		AD9BBFD3203A121B00FB4459 /* ProductCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionViewController.swift; sourceTree = "<group>"; };
 		ADF504BC205D52E30051D704 /* ReceiverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverTableViewCell.swift; sourceTree = "<group>"; };
 		ADF504BE205D65F40051D704 /* ReceiverProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverProductViewController.swift; sourceTree = "<group>"; };
 		C702DB8E205345FA00480118 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
@@ -104,7 +106,7 @@
 		C7070C62204B0B7600B498A7 /* DeliveryFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryFormViewController.swift; sourceTree = "<group>"; };
 		C7070C64204B0C5A00B498A7 /* DeliveryTabFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryTabFormViewController.swift; sourceTree = "<group>"; };
 		C7070C66204B27D500B498A7 /* ProductLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductLevel.swift; sourceTree = "<group>"; };
-		C7070C68204B4B2300B498A7 /* ProductLevelsSecViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductLevelsSecViewController.swift; sourceTree = "<group>"; };
+		C7070C68204B4B2300B498A7 /* ProductCollectionDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCollectionDetailsViewController.swift; sourceTree = "<group>"; };
 		C7218846204FF3000070E0FE /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		C7218848204FFB1E0070E0FE /* ManagerStorageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerStorageViewController.swift; sourceTree = "<group>"; };
 		C721884A204FFB3A0070E0FE /* ManagerStorageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerStorageTableViewCell.swift; sourceTree = "<group>"; };
@@ -287,15 +289,16 @@
 			children = (
 				C7B6502B2038CDEC001BBAB2 /* products.storyboard */,
 				C7B6502D2038CE7D001BBAB2 /* ProductDonateViewController.swift */,
-				AD9BBFD3203A121B00FB4459 /* ProductLevelsViewController.swift */,
+				AD9BBFD3203A121B00FB4459 /* ProductCollectionViewController.swift */,
 				C792DCB72044C896000CF549 /* ProductMainCollectionViewCell.swift */,
-				C7070C68204B4B2300B498A7 /* ProductLevelsSecViewController.swift */,
+				C7070C68204B4B2300B498A7 /* ProductCollectionDetailsViewController.swift */,
 				C7776BA8204F0C3A00963366 /* ProductSenderViewController.swift */,
 				C7F81F6C2055F88500FFB5EC /* ProductSenderFormViewController.swift */,
 				C7F81F6E2055F89B00FFB5EC /* ProductReceiverFormViewController.swift */,
 				C7776BAA204F0C5900963366 /* ReceiverTableViewController.swift */,
 				ADF504BC205D52E30051D704 /* ReceiverTableViewCell.swift */,
 				ADF504BE205D65F40051D704 /* ReceiverProductViewController.swift */,
+				AD024BF1205D7879002A36A6 /* ReceiverFormViewController.swift */,
 			);
 			path = products;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				C7B6502E2038CE7D001BBAB2 /* ProductDonateViewController.swift in Sources */,
 				AD9BBFCE2039C2A100FB4459 /* SignUpViewController.swift in Sources */,
 				ADF504BD205D52E30051D704 /* ReceiverTableViewCell.swift in Sources */,
+				AD024BF2205D7879002A36A6 /* ReceiverFormViewController.swift in Sources */,
 				AD287FA7205A80DC0007A2AD /* DesignableUIView.swift in Sources */,
 				C79FD4B6204D746C005FC0CD /* ProfileViewController.swift in Sources */,
 				C7BB2EC2205098CF00574AB8 /* DeliverySettingsViewController.swift in Sources */,
@@ -490,12 +494,12 @@
 				C7776BA9204F0C3A00963366 /* ProductSenderViewController.swift in Sources */,
 				AD1F3E7F20373F9900D040C8 /* DesignableUIButton.swift in Sources */,
 				AD4585F1203C68570072ABEE /* User.swift in Sources */,
-				C7070C69204B4B2300B498A7 /* ProductLevelsSecViewController.swift in Sources */,
+				C7070C69204B4B2300B498A7 /* ProductCollectionDetailsViewController.swift in Sources */,
 				AD9BBFD22039C51800FB4459 /* CustomSegues.swift in Sources */,
 				AD1F3E6920373AAB00D040C8 /* LoginViewController.swift in Sources */,
 				C7218847204FF3000070E0FE /* UIViewControllerExtension.swift in Sources */,
 				C77BC9882049D468005668CC /* ManagerWaitingProductViewController.swift in Sources */,
-				AD9BBFD4203A121B00FB4459 /* ProductLevelsViewController.swift in Sources */,
+				AD9BBFD4203A121B00FB4459 /* ProductCollectionViewController.swift in Sources */,
 				C77BC98A2049E4D7005668CC /* Transactionold.swift in Sources */,
 				C7D22F6C20500D7200707F01 /* ManagerDeliveryProductViewController.swift in Sources */,
 				AD66084C203AE318007DF894 /* RssTableViewController.swift in Sources */,

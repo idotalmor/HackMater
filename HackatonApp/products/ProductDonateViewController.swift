@@ -1,11 +1,9 @@
 
-
+//done
 import UIKit
 
 class ProductDonateViewController: UIViewController {
     
-    
-    //050-7888094 CHANGE!!!!!!!!!!!!!!!!!!!!!!!!!!
     var strPhoneNumber = "050-7888094"
 
     @IBAction func callBtn(_ sender: UIButton) {
@@ -13,7 +11,7 @@ class ProductDonateViewController: UIViewController {
         if let phoneCallURL:URL = URL(string: "tel:\(strPhoneNumber)") {
             let application:UIApplication = UIApplication.shared
             if (application.canOpenURL(phoneCallURL)) {
-                let alertController = UIAlertController(title: "Materna", message: "Are you sure you want to call \n\(self.strPhoneNumber)?", preferredStyle: .alert)
+                let alertController = UIAlertController(title: "הבנק החברתי למזון תינוקות", message: "האם לחייג למספר\n\(self.strPhoneNumber)?", preferredStyle: .alert)
                 let yesPressed = UIAlertAction(title: "Yes", style: .default, handler: { (action) in
                     application.openURL(phoneCallURL)
                 })
