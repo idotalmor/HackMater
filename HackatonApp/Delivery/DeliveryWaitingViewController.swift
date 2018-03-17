@@ -1,3 +1,4 @@
+//done
 import UIKit
 
 class DeliveryWaitingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -21,7 +22,7 @@ class DeliveryWaitingViewController: UIViewController, UITableViewDelegate, UITa
                 
                 DispatchQueue.main.async {
                     self.transaction.append(Transaction(json: tran))
-                    let indexpath = IndexPath(row: idx, section: 0)
+                    let indexpath = IndexPath(row: self.transaction.count-1, section: 0)
                     self.tableview.insertRows(at: [indexpath], with: .right)
                 }
             }
@@ -57,11 +58,11 @@ class DeliveryWaitingViewController: UIViewController, UITableViewDelegate, UITa
                 cell.nameProduct.text = product.prodName
         
                 var time:String = ""
-                if(transactions.status == "0"){
+                if(transactions.status == "1"){
                     cell.loacationProduct.text = transactions.locationAString
                     time = transactions.locationAtime
         
-                }else if(transactions.status == "3"){
+                }else if(transactions.status == "4"){
                     cell.loacationProduct.text = transactions.locationBString
                     time = transactions.locationBtime
 
@@ -86,7 +87,6 @@ class DeliveryWaitingViewController: UIViewController, UITableViewDelegate, UITa
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        // self.navigationController?.popToRootViewController(animated: true)
         refresh()
     }
     
@@ -94,13 +94,12 @@ class DeliveryWaitingViewController: UIViewController, UITableViewDelegate, UITa
     func refresh(){
         
         transaction = []
-        parameters = ["locationAdeliveryguy": (User.current?.name)!]
         tableview.reloadData()
+
+        parameters = ["locationAdeliveryguy": (User.current?.name)!]
         getDeliveryTransaction()
         
-        transaction = []
         parameters = ["locationBdeliveryguy": (User.current?.name)!]
-        tableview.reloadData()
         getDeliveryTransaction()
         
     }

@@ -13,12 +13,12 @@ class DeliveryWaitingTableViewCell: UITableViewCell {
     var status: Int = 1{
         didSet{
             switch(status){
-            case 0: do {
-                self.inOutLabel.text = "נכנס"
+            case 1: do {
+                self.inOutLabel.text = "למחסן"
                 self.inOutLabel.textColor = UIColor.blue
                 }
-            case 3: do {
-                self.inOutLabel.text = "יוצא"
+            case 4: do {
+                self.inOutLabel.text = "ללקוח"
                 self.inOutLabel.textColor = UIColor.black
                 }
                 

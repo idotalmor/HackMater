@@ -1,3 +1,4 @@
+//done
 import UIKit
 
 
@@ -11,10 +12,7 @@ class DeliverymainViewController: UIViewController, UITableViewDelegate, UITable
 
     @IBOutlet weak var tableView: UITableView!
     @IBAction func refreshpage(_ sender: UIBarButtonItem) {
-        
-        transactions = []
-        tableView.reloadData()
-        getDeliveryTransaction()
+        reloadData()
     }
     
     var json : Any = ""{
@@ -26,11 +24,14 @@ class DeliverymainViewController: UIViewController, UITableViewDelegate, UITable
                 
                 DispatchQueue.main.async {
                     self.transactions.append(Transaction(json: tran))
-                    let indexpath = IndexPath(row: self.transactions.count-1, section: 0)
+                    let indexpath = IndexPath(row: idx, section: 0)
                     self.tableView.insertRows(at: [indexpath], with: .right)
                 }
             }
-        }}
+        }
+        
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,17 @@ class DeliverymainViewController: UIViewController, UITableViewDelegate, UITable
         
         getDeliveryTransaction()
         
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        reloadData()
+    }
+    
+    func reloadData(){
+        transactions = []
+        tableView.reloadData()
+        getDeliveryTransaction()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -80,7 +92,7 @@ class DeliverymainViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "showProductDetails", sender: self)
+        performSegue(withIdentifier: "DeliveryMainToTransaction", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -89,14 +101,6 @@ class DeliverymainViewController: UIViewController, UITableViewDelegate, UITable
         
         }
         
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-       // self.navigationController?.popToRootViewController(animated: true)
-        transactions = []
-        tableView.reloadData()
-        getDeliveryTransaction()
     }
     
 }

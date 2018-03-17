@@ -1,4 +1,4 @@
-
+//done
 import UIKit
 
 class DeliveryTableViewCell: UITableViewCell {
@@ -13,11 +13,11 @@ class DeliveryTableViewCell: UITableViewCell {
         didSet{
             switch(status){
             case 0: do {
-                self.inOutLabel.text = "נכנס"
+                self.inOutLabel.text = "למחסן"
                 self.inOutLabel.textColor = UIColor.blue
                 }
             case 3: do {
-                self.inOutLabel.text = "יוצא"
+                self.inOutLabel.text = "ללקוח"
                 self.inOutLabel.textColor = UIColor.black
                 }
                 

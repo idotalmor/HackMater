@@ -10,7 +10,7 @@ class DeliveryWaitingProductViewController: UIViewController, FCAlertViewDelegat
 
     
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var ProductDitialLabel: UILabel!
+    @IBOutlet weak var productNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var loactionLabel: UILabel!
@@ -43,13 +43,23 @@ class DeliveryWaitingProductViewController: UIViewController, FCAlertViewDelegat
         // Done Button was Pressed, Perform the Action you'd like here.
     }
     
-    @IBAction func wazeBtn(_ sender: UIButton) {
-        
-        var clocation:CLLocation = CLLocation(latitude: 32.082216, longitude: 34.78146)
-        viewWaze(location: clocation)
+
+    @IBAction func toWarehouseWaze(_ sender: Any) {
+        viewWaze(locationstr: ("32.015542/34.781488"))
     }
     
- 
+    @IBAction func toClientLocationWaze(_ sender: Any) {
+        var intStatus = Int((transaction?.status)!)!
+        switch intStatus {
+        case 1:
+            viewWaze(locationstr: (transaction?.locationA)!)
+        case 4 :
+            viewWaze(locationstr: (transaction?.locationB)!)
+        default:
+            print("error deliverywaitingproduct")
+        }
+    }
+    
     
     
     override func viewDidLoad() {
@@ -63,7 +73,7 @@ class DeliveryWaitingProductViewController: UIViewController, FCAlertViewDelegat
             else{return}
         
         imageView.image = product.prodImage
-        ProductDitialLabel.text = product.prodName
+        productNameLabel.text = product.prodName
         
         if(transactions.status == "0"){
             inOutLabel.text = "נכנס"
@@ -83,10 +93,14 @@ class DeliveryWaitingProductViewController: UIViewController, FCAlertViewDelegat
 
  
     
-    func viewWaze(location : CLLocation) {
+    func viewWaze(locationstr : String) {
         
-        let latitude:Double = location.coordinate.latitude;
-        let longitude:Double = location.coordinate.longitude;
+        var strArr = locationstr.components(separatedBy: "/")
+        
+        guard let latitude = Double(strArr[0]),
+            let longitude = Double(strArr[1]) else {return}
+        
+        
         
         var link:String = "waze://"
         let url:NSURL = NSURL(string: link)!
@@ -106,8 +120,9 @@ class DeliveryWaitingProductViewController: UIViewController, FCAlertViewDelegat
         }
         
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         self.navigationController?.popToRootViewController(animated: true)
         
     }

@@ -1,3 +1,6 @@
+//add 2 locations - warehouse client
+//alert did set json
+//done
 
 import UIKit
 import CoreLocation
@@ -8,19 +11,7 @@ class DeliveryConfirmViewController: UIViewController, FCAlertViewDelegate {
     
     
     var transaction: Transaction?
-
-    
-    var fullAddress = ""
-    var city = ""
-    var numberHome = ""
-    var street  = ""
-    var product : ProductID?
-    let geocoder = CLGeocoder()
-
-    let address = "רחוב פינסקר 40 תל אביב"
-    
     var parameters: [String:String] = [:]
-    let url = URL(fileURLWithPath: "https://waze.com/ul")
    
     @IBOutlet weak var imgProduct: UIImageView!
     @IBOutlet weak var clientNameLabel: UILabel!
@@ -43,24 +34,40 @@ class DeliveryConfirmViewController: UIViewController, FCAlertViewDelegate {
         
         alert.delegate = self
         alert.showAlert(inView: self,
-                        withTitle:"שליח",
-                        withSubtitle:"אישור בקשה?",
+                        withTitle:"איסוף תרומה",
+                        withSubtitle:"האם ברצונך לאסוף תרומה זו?",
                         withCustomImage:nil,
                         withDoneButtonTitle:"ביטול",
-                        andButtons:["אישור"]) // Set your button titles here
+                        andButtons:["אשר איסוף","אשר איסוף ופתח וייז"])
     }
     
     func fcAlertView(_ alertView: FCAlertView, clickedButtonIndex index: Int, buttonTitle title: String) {
         if title == "ביטול" {
-            // Perform Action for Button 1
-            print("ביטול")
-        }else{
-          //  parameters = ["id": (transaction?.id)!, "status": "1", "senderuid": (User.current?.name)!]
-         
+            return
+        }
+            var intStatus = Int(transaction!.status)
+        var locationguy = (intStatus == 0) ? "locationAdeliveryguy" :"locationBdeliveryguy"
+        
+            parameters = ["id": (transaction?.id)!, "status": String(intStatus!+1), locationguy: (User.current?.name)!]
             updateDeliveryTransaction()
 
-            print("אישור")
+        if (title == "אשר איסוף ופתח וייז"){
+            switch(intStatus!){
+            case 0:do {
+
+                viewWaze(locationstr: (transaction?.locationA)!)
+                }
+            case 3:do {
+                viewWaze(locationstr: ("32.015542/34.781488"))
+
+                }
+            default: do {
+                print("sdf")}
+                
+            }
+            
         }
+
     }
     
     private func FCAlertDoneButtonClicked(alertView: FCAlertView){
@@ -69,74 +76,60 @@ class DeliveryConfirmViewController: UIViewController, FCAlertViewDelegate {
     
     
     
-    @IBAction func WazeBtn(_ sender: UIButton) {
-        
-        
-       // var coordinates = transaction?.locationA
-        
-        
-    //    guard let result = coordinates?.split(separator: " ") else {return}
-       // print("coordinates",result[0])
-      //  print("coordinates",result[1])
-        
-        geocoder.geocodeAddressString(address, completionHandler: {(placemarks, error) -> Void in
-            if((error) != nil){
-                print("Error", error ?? "")
-            }
-            if let placemark = placemarks?.first {
-                let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
-                print("Lat: \(coordinates.latitude) -- Long: \(coordinates.longitude)")
-                
-                let clocation:CLLocation = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
-                self.viewWaze(location: clocation)
-            }
-        })
-        
-       
-        
-    }
+
     var json : Any = ""{
         didSet{
-            print(json)
-            print("updateDelivery")
-            DispatchQueue.main.async {
-            
-            }
+//            print(json)
+//            print("updateDelivery")
+
         }}
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//
-//        guard let transaction = transaction else{self.dismiss(animated: true, completion: nil)
-//            return}
-//
-//        guard let product = Products().search(forBarcode: transaction.product)
-//            else{return}
-//
-//        imgProduct.image = product.prodImage
-//        productLabel.text = product.prodName
-//
-//        if(transaction.status == "0"){
-//            inOutLabel.text = "נכנס"
-//            clientNameLabel.text = transaction.sendername
-//            LocationLabel.text = transaction.locationAString
-//            dateLabel.text = SecToDate(timeStamp: transaction.locationAtime)
-//        } else if(transaction.status == "3"){
-//            clientNameLabel.text = transaction.receivername
-//            LocationLabel.text = transaction.locationBString
-//            dateLabel.text = SecToDate(timeStamp: transaction.locationBtime)
-//
-//        }
-//
+
+        guard let transaction = transaction else{self.dismiss(animated: true, completion: nil)
+            return}
+
+        guard let product = Products().search(forBarcode: transaction.product)
+            else{self.dismiss(animated: true, completion: nil)
+                return}
+
+        imgProduct.image = product.prodImage
+        productLabel.text = product.prodName
+
+        if(transaction.status == "0"){
+            inOutLabel.text = "איסוף למחסן"
+            clientNameLabel.text = transaction.sendername
+            LocationLabel.text = transaction.locationAString
+            dateLabel.text = SecToDate(timeStamp: transaction.locationAtime)
+        } else if(transaction.status == "3"){
+            clientNameLabel.text = transaction.receivername
+            LocationLabel.text = transaction.locationBString
+            dateLabel.text = SecToDate(timeStamp: transaction.locationBtime)
+
+        }
+
         
     }
     
     
-    func viewWaze(location : CLLocation) {
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.navigationController?.popToRootViewController(animated: true)
         
-        let latitude:Double = location.coordinate.latitude;
-        let longitude:Double = location.coordinate.longitude;
+    }
+    
+
+    
+    func viewWaze(locationstr : String) {
+        
+        var strArr = locationstr.components(separatedBy: "/")
+        
+        guard let latitude = Double(strArr[0]),
+            let longitude = Double(strArr[1]) else {return}
+        
+
         
         var link:String = "waze://"
         let url:NSURL = NSURL(string: link)!
@@ -156,12 +149,6 @@ class DeliveryConfirmViewController: UIViewController, FCAlertViewDelegate {
         }
         
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.popToRootViewController(animated: true)
-        
-    }
-    
     
 }
 
