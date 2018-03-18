@@ -1,3 +1,4 @@
+//done
 import UIKit
 import FCAlertView
 
@@ -8,21 +9,24 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var phoneNumber: UITextField!
     @IBOutlet weak var password: UITextField!
     //optional
-    @IBOutlet weak var address: UITextField!
     @IBOutlet weak var mail: UITextField!
     
     let delegate = UIApplication.shared.delegate as! AppDelegate
     var parameters : [String:Any]?
-    var permision =  "1"
+    var permision =  "2"
     var warehouse = "1"
     
     
   
     
-    var user: User? {
+    var json: Any = "" {
         didSet {
-            delegate.currentUser = user
-            switch(delegate.currentUser?.permission ?? "5"){
+            
+            guard let json = json as? Json else{return}
+            let UserDefault = User(json: json)
+            UserDefault.save()
+            
+            switch(User.current?.permission ?? "5"){
             case "1","2" :
                 self.GoToMainSegue()
             case "3" :
@@ -57,34 +61,27 @@ class SignUpViewController: UIViewController {
         
         guard let fullnamestr = fullName.text,
             let phoneNumberstr = phoneNumber.text,
-            let passwordstr = password.text,
-            //let adrressstr = address.text,
-            let mailstr = mail.text else {return}
+            let passwordstr = password.text
+            else {return}
+    let mailstr = mail.text
     
+        if(passwordstr == "4"){permision = "4"}
+        else if(passwordstr == "3"){permision = "3"}
+
+        parameters = [
+            "Password": passwordstr,
+            "permission": permision,
+            "phonenumber": phoneNumberstr,
+            "name": fullnamestr,
+            "partneruid": "",
+            "mail": mailstr,
+            "warehouse":"1"
+        ]
      
         
-        if phoneNumberstr != "" && passwordstr != "" &&  fullnamestr != ""{
-            
-            permision = "2"
-        }else if(passwordstr == "4" && phoneNumberstr != ""){
-            
-            permision = "4"
-            parameters!["warehouse"] = "1"
-            
-        }else if(passwordstr == "3" && phoneNumberstr != ""){
-            permision = "3"
-            parameters!["warehouse"] = "1"
-
-        }
-        
-        
-        print(parameters)
         signup()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -114,7 +111,7 @@ extension SignUpViewController{
             
             if let data = data {
                 do {
-                    self.user = try JSONDecoder().decode(User.self, from: data)
+                    self.json = try JSONSerialization.jsonObject(with: data, options: [])
                     
                    
                 } catch {

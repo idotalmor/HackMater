@@ -17,6 +17,13 @@ import UIKit
 
         }}
     
+    @IBInspectable var cornerRadius: CGFloat = 0{
+        didSet{
+            self.layer.cornerRadius = cornerRadius
+            self.clipsToBounds = true
+            
+        }}
+    
     @IBInspectable var borderColor: CGFloat = 0{
         didSet{
             self.layer.borderColor = UIColor(hexString: "#007AFF").cgColor

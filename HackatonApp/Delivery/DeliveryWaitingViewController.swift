@@ -99,10 +99,10 @@ class DeliveryWaitingViewController: UIViewController, UITableViewDelegate, UITa
         tableview.reloadData()
 
         parameters = ["locationAdeliveryguy": (User.current?.name)!]
-        getDeliveryTransaction()
+        getDeliveryTransaction(urlstr: "https://maternaApp.mybluemix.net/api/v1/transactions/locationadeliveryguy")
         
         parameters = ["locationBdeliveryguy": (User.current?.name)!]
-        getDeliveryTransaction()
+        getDeliveryTransaction(urlstr: "https://maternaApp.mybluemix.net/api/v1/transactions/locationbdeliveryguy")
         
     }
     
@@ -111,8 +111,8 @@ class DeliveryWaitingViewController: UIViewController, UITableViewDelegate, UITa
 
 extension DeliveryWaitingViewController {
     
-    func getDeliveryTransaction(){
-        guard let url = URL(string: "https://maternaApp.mybluemix.net/api/v1/transactions/locationadeliveryguy") else { return }
+    func getDeliveryTransaction(urlstr:String){
+        guard let url = URL(string: urlstr) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")

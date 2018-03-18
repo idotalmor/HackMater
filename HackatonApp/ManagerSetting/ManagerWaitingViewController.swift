@@ -43,6 +43,7 @@ class ManagerWaitingViewController: UIViewController, UITableViewDelegate, UITab
     func reloadData(){
         
         transactions = []
+        tableview.reloadData()
         var parametersjson = ["status": "0","warehouse": User.current?.warehouse]
         getWaitingProducts(params: parametersjson)
         parametersjson = ["status": "3","warehouse":  User.current?.warehouse]

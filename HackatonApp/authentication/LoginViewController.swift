@@ -1,5 +1,6 @@
 //background color - #C3E5FC
 //button - #004F96
+//done
 
 import UIKit
 import FCAlertView
@@ -21,17 +22,17 @@ class LoginViewController: UIViewController {
     
     var parameters: [String:String] = [:]
     
-    @IBAction func TestPassToMain(_ sender: UIButton) {
+    @IBAction func AnonyLogin(_ sender: UIButton) {
         
      parameters = [
-        "Password": "",
+        "Password": UUID().uuidString,
         "permission": "1",
-        "phonenumber": "phonenumber",
-        "name": "name",
-        "partneruid": "partneruid",
-        "mail": "mail",
+        "phonenumber": " ",
+        "name": "אנונימי",
+        "partneruid": " ",
+        "mail": " ",
         "warehouse":"1"]
-        
+
         signup()
 
     }
@@ -42,7 +43,15 @@ class LoginViewController: UIViewController {
             
             var UserDefault = User(json: json[0])
             UserDefault.save()
-            
+            getPermissionToSegue()
+        }
+    }
+    
+    var userSign: Any = ""{
+        didSet {
+            guard let json = self.userSign as? Json else{return}
+            var UserDefault = User(json: json)
+            UserDefault.save()
             getPermissionToSegue()
         }
     }
@@ -104,10 +113,7 @@ class LoginViewController: UIViewController {
         let backgroundImgView = UIImageView(image: backgroundImg)
         backgroundImgView.contentMode = .scaleAspectFit
         self.view.insertSubview(backgroundImgView, at: 0)
-        
-        
-
-    
+ 
     }
     
     func getPermissionToSegue() {
@@ -161,7 +167,7 @@ extension LoginViewController{
     }
     
     func signup(){
-        guard let url = URL(string: "https://maternaApp.mybluemix.net/api/v1/users/signup") else { return }
+        guard let url = URL(string: "https://maternaapp.mybluemix.net/api/v1/users/signup") else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -176,7 +182,7 @@ extension LoginViewController{
 
             if let data = data {
                 do {
-                   self.user = try JSONSerialization.jsonObject(with: data, options: [])
+                   self.userSign = try JSONSerialization.jsonObject(with: data, options: [])
                   
                 } catch {
                     print(error)
