@@ -33,6 +33,12 @@ extension UIViewController{
         return today
     }
     
+    func stringFrom(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        return dateFormatter.string(from: date)
+    }
+    
 
     
     

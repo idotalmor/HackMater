@@ -1,44 +1,94 @@
-
+//done
 import UIKit
 import CoreLocation
 import FCAlertView
 
 
-class ProductSenderViewController: UIViewController, UIPickerViewDelegate,UIPickerViewDataSource, UIGestureRecognizerDelegate{
+class ProductSenderViewController: UIViewController, UIPickerViewDelegate,UIPickerViewDataSource, UIGestureRecognizerDelegate, FCAlertViewDelegate{
     
     var productId: String = ""
     var parameters: [String: Any] = ["":""]
-    var bqStr: String?
+    var expirationdate: String?
+    
     
     let delegate = UIApplication.shared.delegate as! AppDelegate
     
     var products :[ProductID]?
-    
+    var namestr:String = ""
+    var phoneNumberstr:String = ""
+    var citystr:String = ""
+    var streetstr:String = ""
+    var houseNumstr:String = ""
+
 
     
     var locationString:String?
     var coordinateString = ""{
         didSet{
-//            var receiverPhone = phoneNumberTextField.text
-//            var name = nameTextField.text
-//            parameters = ["id":transaction!.id,"status":"3","receiverphonenumber":receiverPhone!,"receiveruid":(User.current?.id)!,"receivername":name!,"locationBtime":currentToSeconds(),"locationBString":locationString!,"locationB":coordinateString]
-//            claimTransaction()
-            
-            
+            DispatchQueue.main.async {
+                self.parameters = ["status": "0",
+                                   "locationA": self.coordinateString,
+                                   "locationAString": self.locationString,
+                              "locationAtime": self.currentToSeconds(),
+                              "locationAdeliveryguy": "",
+                              "warehouse": "1",
+                              "locationB": "",
+                              "locationBString": "",
+                              "locationBtime": "",
+                              "locationBdeliveryguy": "",
+                              "product": self.productId,
+                              "expirationdate": self.expirationdate!,
+                              "warehouseguy": "",
+                              "senderuid":(User.current?.id)!,
+                              "senderphonenumber":self.phoneNumberstr,
+                              "sendername":self.namestr,
+                              "receiveruid":"",
+                              "receiverphonenumber":"",
+                              "receivername":""]
+                self.addTransaction(urlstr: "https://maternaApp.mybluemix.net/api/v1/transactions/add")
+            }
+
+          
         }
     }
     
     var json : Any = ""{
         didSet{
             guard let user = json as? Json else {return}
-            
-            misAlert(Title: "התרומה התקבלה בהצלחה במערכת", Message: "ניצור איתך קשר בהקדם", image: delegate.pictures[1])
+            DispatchQueue.main.async {
+                let alert = FCAlertView();
+                alert.colorScheme = UIColor(red: 0/255, green: 79/255, blue: 150/255, alpha: 1)
+                alert.dismissOnOutsideTouch = true
+                alert.bounceAnimations = true
+                
+                alert.delegate = self
+                let image = UIImage(named: "icons8-checkmark")
+                alert.showAlert(inView: self,
+                                withTitle:"התרומה התקבלה בהצלחה במערכת",
+                                withSubtitle:"ניצור איתך קשר בהקדם",
+                                withCustomImage:image,
+                                withDoneButtonTitle:"אישור",
+                                andButtons:["ביטול"])
+            }
+
             
         }
     }
     
-    @IBOutlet weak var imageView: UIImageView!
+
+
+
+func fcAlertView(_ alertView: FCAlertView, clickedButtonIndex index: Int, buttonTitle title: String) {
+    self.navigationController?.popToRootViewController(animated: true)
+
+}
+
+func fcAlertDoneButtonClicked(_ alertView: FCAlertView){
+    self.navigationController?.popToRootViewController(animated: true)
+}
+
     
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var seriesBtn: UIButton!
     @IBOutlet weak var fullNameTF: UITextField!
     @IBOutlet weak var phoneNumTF: UITextField!
@@ -47,20 +97,18 @@ class ProductSenderViewController: UIViewController, UIPickerViewDelegate,UIPick
     @IBOutlet weak var homeNumTF: UITextField!
     
     @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var pickerViewContainer: UIView!
     
     @IBAction func getQRBtn(_ sender: UIButton) {
         
-     //   getQRCamera()
         performSegue(withIdentifier: "senderFormToQrSegue", sender: nil)
     }
     
     @IBAction func seriesSelected(_ sender: UIButton) {
-        if pickerView.isHidden {
-            pickerView.isHidden = false
+        if pickerViewContainer.isHidden {
+            pickerViewContainer.isHidden = false
         }
-        
-        pickerView.dataSource = self
-        pickerView.delegate = self
+        self.view.endEditing(true)
     }
     
     @IBOutlet weak var expirationDateTF: UITextField!
@@ -79,12 +127,13 @@ class ProductSenderViewController: UIViewController, UIPickerViewDelegate,UIPick
         datePickerTF.isHidden = !datePickerTF.isHidden
         doneDateBtn.isHidden = !doneDateBtn.isHidden
         backDateView.isHidden = !backDateView.isHidden
+        self.view.endEditing(true)
 
     }
     
     @IBAction func datePickerBtn(_ sender: UIDatePicker) {
         expirationDateTF.text = stringFrom(date: datePickerTF.date)
-        
+        expirationdate = String(sender.date.timeIntervalSince1970)
     }
     
     
@@ -92,56 +141,21 @@ class ProductSenderViewController: UIViewController, UIPickerViewDelegate,UIPick
     
     @IBAction func saveFormBtn(_ sender: UIButton) {
         
-//        cityT = cityTF.text!
-//        streetT = streetTF.text!
-//        streetNumTF = homeNumTF.text!
-//        validMonthTF = expirationDateTF.text!.description
-//
-//        let geocoder = CLGeocoder()
-//
-//        adressTF = streetT+spaces+streetNumTF+spaces+cityT
-//        validAsString = validMonthTF+"/"+validYearTF
-//        print(adressTF)
-//
-//        geocoder.geocodeAddressString(adressTF, completionHandler: {(placemarks, error) -> Void in
-//            if((error) != nil){
-//                print("Error", error ?? "")
-//            }
-//            if let placemark = placemarks?.first {
-//                let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
-//                print("Lat: \(coordinates.latitude) -- Long: \(coordinates.longitude)")
-//                self.coordinatesLongitude = coordinates.longitude.description
-//                self.coordinatesLatitude = coordinates.latitude.description
-//                self.coordinatesAsString = self.coordinatesLongitude+"/"+self.coordinatesLatitude
-//
-//            }
-//        })
-//
-//
-//
-//        if (cityT != "" && streetT != "" && streetNumTF != "" && validYearTF != "" && validMonthTF != "" && adressTF != "" && validAsString != "" ){
-//            parameters = ["product": series,
-//                          "locationAdeliveryguy": "locationAdeliveryguy",
-//                          "warehouseguy": "warehouseguy",
-//                          "warehouse": "warehouse",
-//                          "locationBtime": "locationBtime",
-//                          "locationBString": adressTF,
-//                          "locationA": "locationA",
-//                          "locationAString": "locationAString",
-//                          "id": "d490d5ab6f5090630009115301c848e2",
-//                          "locationBdeliveryguy": "locationBdeliveryguy",
-//                          "status": "status",
-//                          "locationAtime": "locationAtime",
-//                          "locationB": coordinatesAsString,
-//                          "expirationdate": validAsString]
-//
-//
-//            sendDetailsMain(urlstr: "https://maternaApp.mybluemix.net/api/v1/transactions/add")
-//        }else{
-//
-//            misAlert(Title: "חסרים", Message: "נא למלא את כל שדות החובה", image: delegate.pictures[0])
-//        }
+        guard let name = fullNameTF.text,
+        let phoneNumber = phoneNumTF.text,
+        let city = cityTF.text,
+        let street = streetTF.text,
+        let houseNum = homeNumTF.text
+            else {misAlert(Title: "חסרים", Message: "נא למלא את כל שדות החובה", image: delegate.pictures[0])
+                return}
+        namestr = name
+        phoneNumberstr = phoneNumber
+        citystr = city
+        streetstr = street
+        houseNumstr = houseNum
         
+        locationString(street: street, houseNum: houseNum, city: city)
+           
     }
     
 
@@ -150,7 +164,8 @@ class ProductSenderViewController: UIViewController, UIPickerViewDelegate,UIPick
         super.viewDidLoad()
         
         products = Products().products
-        
+        pickerView.dataSource = self
+        pickerView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -159,12 +174,13 @@ class ProductSenderViewController: UIViewController, UIPickerViewDelegate,UIPick
         
         var prod = Products().search(forBarcode: delegate.barcode)
         
-        seriesBtn.setTitle(prod?.prodName, for: .normal)
-        if prod?.prodImage != nil {
+        if prod != nil {
+            productId = (prod?.barcode)!
+            seriesBtn.setTitle(prod?.prodName, for: .normal)
             imageView.image = prod?.prodImage}
         
     }
-    
+
     func locationString(street:String,houseNum:String,city:String){
         
         let geocoder = CLGeocoder()
@@ -184,7 +200,6 @@ class ProductSenderViewController: UIViewController, UIPickerViewDelegate,UIPick
                 
             }
         })}
-    
     public func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
         
@@ -202,7 +217,7 @@ class ProductSenderViewController: UIViewController, UIPickerViewDelegate,UIPick
         imageView.image = products![row].prodImage
         seriesBtn.setTitle(products![row].prodName, for: .normal)
         productId = products![row].barcode
-        pickerView.isHidden = true
+        pickerViewContainer.isHidden = true
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -213,7 +228,7 @@ class ProductSenderViewController: UIViewController, UIPickerViewDelegate,UIPick
 }
 extension ProductSenderViewController{
     
-    func sendDetailsMain (urlstr:String){
+    func addTransaction (urlstr:String){
         guard let url = URL(string: urlstr) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -230,7 +245,6 @@ extension ProductSenderViewController{
                 do {
                     self.json = try JSONSerialization.jsonObject(with: data, options: [])
                     
-                    
                 } catch {
                     print(error)
                 }
@@ -240,10 +254,6 @@ extension ProductSenderViewController{
         
     }
     
-    private func stringFrom(date: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy"
-        return dateFormatter.string(from: datePickerTF.date)
-    }
+
 
 }
