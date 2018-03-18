@@ -20,6 +20,7 @@
 		AD287FA7205A80DC0007A2AD /* DesignableUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD287FA6205A80DC0007A2AD /* DesignableUIView.swift */; };
 		AD4585F1203C68570072ABEE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4585F0203C68570072ABEE /* User.swift */; };
 		AD4585F3203C6D640072ABEE /* RssArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4585F2203C6D640072ABEE /* RssArticleViewController.swift */; };
+		AD619B1A205DC8AA0012E6C6 /* ProductQrCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD619B19205DC8AA0012E6C6 /* ProductQrCameraViewController.swift */; };
 		AD66084C203AE318007DF894 /* RssTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD66084B203AE318007DF894 /* RssTableViewController.swift */; };
 		AD660851203B0187007DF894 /* RssItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD660850203B0187007DF894 /* RssItem.swift */; };
 		AD660853203B0F88007DF894 /* RssCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD660852203B0F88007DF894 /* RssCell.swift */; };
@@ -89,6 +90,7 @@
 		AD287FA6205A80DC0007A2AD /* DesignableUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableUIView.swift; sourceTree = "<group>"; };
 		AD4585F0203C68570072ABEE /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AD4585F2203C6D640072ABEE /* RssArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssArticleViewController.swift; sourceTree = "<group>"; };
+		AD619B19205DC8AA0012E6C6 /* ProductQrCameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductQrCameraViewController.swift; sourceTree = "<group>"; };
 		AD66084B203AE318007DF894 /* RssTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssTableViewController.swift; sourceTree = "<group>"; };
 		AD660850203B0187007DF894 /* RssItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssItem.swift; sourceTree = "<group>"; };
 		AD660852203B0F88007DF894 /* RssCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssCell.swift; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				C7070C68204B4B2300B498A7 /* ProductCollectionDetailsViewController.swift */,
 				C7776BA8204F0C3A00963366 /* ProductSenderViewController.swift */,
 				C7F81F6C2055F88500FFB5EC /* ProductSenderFormViewController.swift */,
+				AD619B19205DC8AA0012E6C6 /* ProductQrCameraViewController.swift */,
 				C7F81F6E2055F89B00FFB5EC /* ProductReceiverFormViewController.swift */,
 				C7776BAA204F0C5900963366 /* ReceiverTableViewController.swift */,
 				ADF504BC205D52E30051D704 /* ReceiverTableViewCell.swift */,
@@ -491,6 +494,7 @@
 				C79FD4B6204D746C005FC0CD /* ProfileViewController.swift in Sources */,
 				C7BB2EC2205098CF00574AB8 /* DeliverySettingsViewController.swift in Sources */,
 				AD1F3E6F20373AAB00D040C8 /* HackatonApp.xcdatamodeld in Sources */,
+				AD619B1A205DC8AA0012E6C6 /* ProductQrCameraViewController.swift in Sources */,
 				C7776BA9204F0C3A00963366 /* ProductSenderViewController.swift in Sources */,
 				AD1F3E7F20373F9900D040C8 /* DesignableUIButton.swift in Sources */,
 				AD4585F1203C68570072ABEE /* User.swift in Sources */,

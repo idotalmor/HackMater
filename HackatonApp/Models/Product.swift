@@ -33,7 +33,7 @@ struct Products{
         products.append(product)
     }
     
-    func search(forBarcode barcode: String) -> ProductID? {
+    func search(forBarcode barcode: String?) -> ProductID? {
         return products.filter({ $0.barcode == barcode }).first
     }
 

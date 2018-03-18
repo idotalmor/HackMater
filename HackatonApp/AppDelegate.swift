@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var currentUser: User?
     var pictures = [UIImage]()
+    var barcode: String?
+    
     
    // var products = [String:Product]()
     
