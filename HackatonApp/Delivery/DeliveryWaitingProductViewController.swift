@@ -11,7 +11,9 @@ class DeliveryWaitingProductViewController: UIViewController, FCAlertViewDelegat
     
     var json : Any = ""{
         didSet{
-            
+            DispatchQueue.main.sync {
+                self.navigationController?.popToRootViewController(animated: true)
+            }
         }}
     
     @IBOutlet weak var imageView: UIImageView!

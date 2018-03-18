@@ -1,15 +1,13 @@
-
+//done
 import UIKit
 import AVFoundation
 
 class DeliveryQRScannerController: UIViewController {
     
-    @IBOutlet var messageLabel:UILabel!
-    
-    var prod: ProductID?
     
     var captureSession = AVCaptureSession()
-    
+       let delegate = UIApplication.shared.delegate as! AppDelegate
+
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var qrCodeFrameView: UIView?
     
@@ -70,7 +68,7 @@ class DeliveryQRScannerController: UIViewController {
         captureSession.startRunning()
         
         // Move the message label and top bar to the front
-        view.bringSubview(toFront: messageLabel)
+       // view.bringSubview(toFront: messageLabel)
         //view.bringSubview(toFront: topbar)
         
         // Initialize QR Code Frame to highlight the QR code
@@ -125,7 +123,7 @@ extension DeliveryQRScannerController: AVCaptureMetadataOutputObjectsDelegate {
         // Check if the metadataObjects array is not nil and it contains at least one object.
         if metadataObjects.count == 0 {
             qrCodeFrameView?.frame = CGRect.zero
-            messageLabel.text = "No QR code is detected"
+            //messageLabel.text = "No QR code is detected"
             return
         }
         
@@ -140,15 +138,10 @@ extension DeliveryQRScannerController: AVCaptureMetadataOutputObjectsDelegate {
             if metadataObj.stringValue != nil {
                 //launchApp(decodedURL: metadataObj.stringValue!)
                 var str = metadataObj.stringValue
-                prod = Products().search(forBarcode: str!)
                 performSegue(withIdentifier: "DeliveryScannerToQRFromSegue", sender: self)
-                print("1111111",prod?.barcode)
-                print("222222",prod?.prodLink)
                 connection.isEnabled = false
-                
-                
-              //  print("333333")
-                var omer = prod?.barcode
+
+                delegate.barcode = str
 
                 
                 
@@ -159,9 +152,6 @@ extension DeliveryQRScannerController: AVCaptureMetadataOutputObjectsDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if(segue.identifier == "DeliveryScannerToQRFromSegue"){
             guard let dest = segue.destination as? DeliveryQrFormViewController else {return}
-            dest.prodseg = prod
-            
-
 
         }
     }

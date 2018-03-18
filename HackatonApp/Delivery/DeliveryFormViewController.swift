@@ -1,244 +1,239 @@
-import CoreLocation
+
+//done
 import UIKit
+import CoreLocation
 import FCAlertView
 
 
-class DeliveryFormViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UIGestureRecognizerDelegate {
+class DeliveryFormViewController: UIViewController, UIPickerViewDelegate,UIPickerViewDataSource, UIGestureRecognizerDelegate, FCAlertViewDelegate{
     
-    @IBOutlet weak var validYearTxt: UITextField!
-    @IBOutlet weak var validMonthTxt: UITextField!
-    @IBOutlet weak var sec2Btn: UIButton!
-    @IBOutlet weak var sec1Btn: UIButton!
-    @IBOutlet weak var pickerView: UIPickerView!
-    @IBOutlet weak var fullNameTxt: UITextField!
-    @IBOutlet weak var numberTxt: UITextField!
-    @IBOutlet weak var cityTxt: UITextField!
-    @IBOutlet weak var streetTxt: UITextField!
-    @IBOutlet weak var streetnumTxt: UITextField!
+    var productId: String = ""
+    var parameters: [String: Any] = ["":""]
+    var expirationdate: String?
+    
     
     let delegate = UIApplication.shared.delegate as! AppDelegate
     
-    var series: String = ""
-    var level: String?
-    var vaildDate: String = ""
-    var fullnameTF: String = ""
-    var phoneNumberTF: String = ""
-    var adressTF: String = ""
-    var cityTF: String = ""
-    var streetTF: String = ""
-    var streetNumTF: String = ""
-    var coordinatesLatitude:String = ""
-    var coordinatesLongitude:String = ""
-    var coordinatesAsString:String = ""
-    var validYearTF:String = ""
-    var validMonthTF:String = ""
-    var validAsString:String = ""
-    var locationAtime:String = ""
-    var warehouse:String = "1"
-    
-    let spaces = String(repeating: " ", count: 1)
-    
-    var prod : ProductID?
-    
-    var productsLevel = [LevelProduct]()
-    
-    var parameters : [String:String] = [:]
-    var str2: String = ""
-    //var product = [Test]()
-    var product: [ProductID]?
+    var products :[ProductID]?
+    var namestr:String = ""
+    var phoneNumberstr:String = ""
+    var citystr:String = ""
+    var streetstr:String = ""
+    var houseNumstr:String = ""
     
     
-    @IBAction func sendDetailsBtn(_ sender: Any) {
-        
-        
-        // Time
-        var millisecondsSince1970:Int {
-            return Int((Date().timeIntervalSince1970).rounded())
-        }
-        // 1
-        let str1 = "\(millisecondsSince1970)"
-        print(str1)
-        // 2
-        str2 = String(millisecondsSince1970)
-        print(str2)
-
-        cityTF = cityTxt.text!
-        streetTF = streetTxt.text!
-        streetNumTF = streetnumTxt.text!
-        validYearTF = validYearTxt.text!.description
-        validMonthTF = validMonthTxt.text!.description
-        fullnameTF = fullNameTxt.text!
-        phoneNumberTF = numberTxt.text!
-        
-        let geocoder = CLGeocoder()
-        
-        adressTF = streetTF+spaces+streetNumTF+spaces+cityTF
-        validAsString = validMonthTF+"/"+validYearTF
-        print(adressTF)
-        
-        geocoder.geocodeAddressString(adressTF, completionHandler: {(placemarks, error) -> Void in
-            if((error) != nil){
-                print("Error", error ?? "")
+    
+    var locationString:String?
+    var coordinateString = ""{
+        didSet{
+            DispatchQueue.main.async {
+                self.parameters = ["status": "1",
+                                   "locationA": self.coordinateString,
+                                   "locationAString": self.locationString,
+                                   "locationAtime": self.currentToSeconds(),
+                                   "locationAdeliveryguy": User.current?.name,
+                                   "warehouse": "1",
+                                   "locationB": "",
+                                   "locationBString": "",
+                                   "locationBtime": "",
+                                   "locationBdeliveryguy": "",
+                                   "product": self.productId,
+                                   "expirationdate": self.expirationdate!,
+                                   "warehouseguy": "",
+                                   "senderuid":(User.current?.id)!,
+                                   "senderphonenumber":self.phoneNumberstr,
+                                   "sendername":self.namestr,
+                                   "receiveruid":"",
+                                   "receiverphonenumber":"",
+                                   "receivername":""]
+                self.addTransaction(urlstr: "https://maternaApp.mybluemix.net/api/v1/transactions/add")
             }
-            if let placemark = placemarks?.first {
-                let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
-                print("Lat: \(coordinates.latitude) -- Long: \(coordinates.longitude)")
-                self.coordinatesLongitude = coordinates.longitude.description
-                self.coordinatesLatitude = coordinates.latitude.description
-                self.coordinatesAsString = self.coordinatesLatitude+"/"+self.coordinatesLongitude
-                
-            }
-        })
-        
-        pickerView.dataSource = self
-        pickerView.delegate = self
-        
-        if (cityTF != "" && streetTF != "" && streetNumTF != "" && validYearTF != "" && validMonthTF != "" && adressTF != "" && validAsString != "" ){
-            parameters =
-                ["id": "0",
-                 "status": "0",
-                 "locationA": coordinatesAsString,
-                 "locationAString": adressTF,
-                 "locationAtime": str2,
-                 "warehouse": warehouse,
-                 "locationB": "coordinate",
-                 "locationBString": "adressTF",
-                 "locationBtime": "1970",
-                 "todeliveryguy": "deliveryguyuid",
-                 "fromdeliveryguy": "deliveryguyuid",
-                 "product": series,
-                 "experationdate": validAsString,
-                 "warehouseguy": "warehouseguyuid",
-                 "senderuid": phoneNumberTF,
-                 "senderphonenumber":phoneNumberTF,
-                 "sendername":fullnameTF,
-                 "recieveruid":"uid",
-                 "recieverphonenumber":"phonenumber"]
             
             
-            sendDetails()
-        }else{
-            
-            misAlert(Title: "חסרים", Message: "נא למלא את כל שדות החובה", image: delegate.pictures[0])
         }
     }
-    
-    
-    @IBAction func sec1Sellect(_ sender: UIButton) {
-        
-        if pickerView.isHidden {
-            pickerView.isHidden = false
-        }
-        
-        pickerView.dataSource = self
-        pickerView.delegate = self
-    }
-    
-    @IBAction func sec2Level(_ sender: Any) {
-        
-        
-        if pickerView.isHidden {
-            pickerView.isHidden = false
-        }
-        
-        pickerView.dataSource = self
-        pickerView.delegate = self
-    }
-    
     
     var json : Any = ""{
         didSet{
-            print(json)
-            guard let transaction = json as? Json else {return}
-            // product = [Test(json: transaction)]
-            
+            guard let user = json as? Json else {return}
             DispatchQueue.main.async {
-
-                self.misAlert(Title: "המוצר התקבל בהצלחה במערכת", Message: "ניצור איתך קשר בהקדם", image: self.delegate.pictures[1])
-            
+                let alert = FCAlertView();
+                alert.colorScheme = UIColor(red: 0/255, green: 79/255, blue: 150/255, alpha: 1)
+                alert.dismissOnOutsideTouch = true
+                alert.bounceAnimations = true
+                
+                alert.delegate = self
+                let image = UIImage(named: "icons8-checkmark")
+                alert.showAlert(inView: self,
+                                withTitle:"התרומה התקבלה בהצלחה במערכת",
+                                withSubtitle:"ניצור איתך קשר בהקדם",
+                                withCustomImage:image,
+                                withDoneButtonTitle:"אישור",
+                                andButtons:["ביטול"])
             }
+            
+            
         }
     }
+    
+    
+    
+    
+    func fcAlertView(_ alertView: FCAlertView, clickedButtonIndex index: Int, buttonTitle title: String) {
+        self.navigationController?.popToRootViewController(animated: true)
+        
+    }
+    
+    func fcAlertDoneButtonClicked(_ alertView: FCAlertView){
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var seriesBtn: UIButton!
+    @IBOutlet weak var fullNameTF: UITextField!
+    @IBOutlet weak var phoneNumTF: UITextField!
+    @IBOutlet weak var streetTF: UITextField!
+    @IBOutlet weak var cityTF: UITextField!
+    @IBOutlet weak var homeNumTF: UITextField!
+    
+    @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var pickerViewContainer: UIView!
+    
+    
+    @IBAction func seriesSelected(_ sender: UIButton) {
+        if pickerViewContainer.isHidden {
+            pickerViewContainer.isHidden = false
+        }
+        self.view.endEditing(true)
+    }
+    
+    @IBOutlet weak var expirationDateTF: UITextField!
+    @IBOutlet weak var datePickerTF: UIDatePicker!
+    @IBOutlet weak var doneDateBtn: DesignableButton!
+    @IBOutlet weak var backDateView: UIView!
+    
+    @IBAction func doneDate(_ sender: Any) {
+        
+        datePickerTF.isHidden = !datePickerTF.isHidden
+        doneDateBtn.isHidden = !doneDateBtn.isHidden
+        backDateView.isHidden = !backDateView.isHidden
+        
+    }
+    @IBAction func expirationDateBtn(_ sender: Any) {
+        datePickerTF.isHidden = !datePickerTF.isHidden
+        doneDateBtn.isHidden = !doneDateBtn.isHidden
+        backDateView.isHidden = !backDateView.isHidden
+        self.view.endEditing(true)
+        
+    }
+    
+    @IBAction func datePickerBtn(_ sender: UIDatePicker) {
+        expirationDateTF.text = stringFrom(date: datePickerTF.date)
+        expirationdate = String(sender.date.timeIntervalSince1970)
+    }
+    
+    
+    
+    
+    @IBAction func saveFormBtn(_ sender: UIButton) {
+        
+        guard let name = fullNameTF.text,
+            let phoneNumber = phoneNumTF.text,
+            let city = cityTF.text,
+            let street = streetTF.text,
+            let houseNum = homeNumTF.text
+            else {misAlert(Title: "חסרים", Message: "נא למלא את כל שדות החובה", image: delegate.pictures[0])
+                return}
+        namestr = name
+        phoneNumberstr = phoneNumber
+        citystr = city
+        streetstr = street
+        houseNumstr = houseNum
+        
+        locationString(street: street, houseNum: houseNum, city: city)
+        
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        product = Products().products
-        
-        pickerView.isHidden = true
-        
-        fullNameTxt.text = User.current?.name
-        numberTxt.text = User.current?.phonenumber
-        
-//        cityTxt.text!
-//        streetTxt.text!
-//        streetnumTxt.text!
-        
-        
-       
-     
+        products = Products().products
+        pickerView.dataSource = self
+        pickerView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
+        
     }
     
+    func locationString(street:String,houseNum:String,city:String){
+        
+        let geocoder = CLGeocoder()
+        locationString = street+" "+houseNum+" "+city
+        
+        
+        geocoder.geocodeAddressString(locationString!, completionHandler: {(placemarks, error) -> Void in
+            if((error) != nil){
+                print("Error", error ?? "")
+            }
+            if let placemark = placemarks?.first {
+                let coordinates:CLLocationCoordinate2D = placemark.location!.coordinate
+                
+                let coordinatesLongitude = coordinates.longitude.description
+                let coordinatesLatitude = coordinates.latitude.description
+                self.coordinateString =  coordinatesLatitude+"/"+coordinatesLongitude
+                
+            }
+        })}
     public func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
         
     }
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return product!.count
+        return products!.count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return product![row].prodName
-        
-        
-        
+        return products![row].prodName
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        sec2Btn.setTitle(product![row].prodName, for: .normal)
-        series = product![row].barcode
-        pickerView.isHidden = true
         
+        imageView.image = products![row].prodImage
+        seriesBtn.setTitle(products![row].prodName, for: .normal)
+        productId = products![row].barcode
+        pickerViewContainer.isHidden = true
     }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.popToRootViewController(animated: true)
-        
-    }
+    
 }
-
 extension DeliveryFormViewController{
     
-    func sendDetails (){
-        guard let url = URL(string: "https://maternaApp.mybluemix.net/api/v1/transactions/add") else { return }
+    func addTransaction (urlstr:String){
+        guard let url = URL(string: urlstr) else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
         guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
         request.httpBody = httpBody
         
         let session = URLSession.shared
         session.dataTask(with: request) { (data, response, error) in
             if let response = response {
-                print(response)
             }
             
             if let data = data {
                 do {
                     self.json = try JSONSerialization.jsonObject(with: data, options: [])
-                    //  self.json = try JSONDecoder().decode([[Products]].self, from: data)
-                    
-                    print(self.json)
                     
                 } catch {
                     print(error)
@@ -247,10 +242,11 @@ extension DeliveryFormViewController{
             
             }.resume()
         
-        
     }
     
-   
+    
+    
 }
+
 
 
